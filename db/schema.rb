@@ -18,9 +18,8 @@ ActiveRecord::Schema.define(version: 2020_08_12_223005) do
     t.string "height"
     t.string "temperament"
     t.string "life_span"
-    t.string "alt_names"
+    t.string "breed_group"
     t.string "origin"
-    t.string "country_code"
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Breed.destroy_all
+
+
+response = RestClient.get('https://api.thedogapi.com/v1/breeds', headers: {'x-api-key': ENV['API_KEY']})
+breeds = JSON.parse response
+breeds.map do |breed|
+    id = 'id'
+    response = RestClient.get("https://api.thedogapi.com/v1/images/search?breed_id=#{breed[id]}", headers: {'x-api-key': ENV['API_KEY']})
+    image = JSON.parse(response)
+
+    Breed.create(
+        name: breed['name'],
+        weight: breed['weight']['imperial'],
+        height: breed['height']['imperial'],
+        temperament: breed['temperament'],
+        life_span: breed['life_span'],
+        origin: breed['origin'],
+        breed_group: breed['breed_group'],
+        image_url: image[0]['url']
+    )
+end

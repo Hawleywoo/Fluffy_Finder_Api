@@ -6,9 +6,8 @@ class CreateBreeds < ActiveRecord::Migration[6.0]
       t.string :height
       t.string :temperament
       t.string :life_span
-      t.string :alt_names
+      t.string :breed_group
       t.string :origin
-      t.string :country_code
       t.string :image_url
 
       t.timestamps
