@@ -1,4 +1,4 @@
 class UserBreed < ApplicationRecord
-  belongs_to :users
-  belongs_to :breeds
+  belongs_to :user
+  belongs_to :breed
 end

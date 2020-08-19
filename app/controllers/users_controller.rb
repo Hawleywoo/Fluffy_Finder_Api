@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(username: params[:username], password: params[:password])
+        @user = User.new(username: params[:username], password: params[:password], email: params[:email])
 
         if @user.valid?
             @user.save
@@ -17,6 +17,12 @@ class UsersController < ApplicationController
         else
             render json: { errors: @user.errors.full_messages }, status: :not_acceptable
         end
+    end
+
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        render json: :no_content
     end
 
 end

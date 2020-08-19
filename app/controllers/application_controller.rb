@@ -27,10 +27,10 @@ class ApplicationController < ActionController::API
     def login
         @user = User.find_by(username: params[:username])
 
-        if @user && user.authenticate(params[:password])
+        if @user && @user.authenticate(params[:password])
             secret = Rails.application.secret_key_base
             @token = JWT.encode({user_id: @user.id}, secret)
-            render json: {user: @user, breeds: @user.breeds, token: token }, status: :accepted
+            render json: {user: @user, token: @token }, include: [:breeds], status: :accepted
         else
             render json: { errors: ['Invalid username or Password']}, status: :unatuhorized
         end

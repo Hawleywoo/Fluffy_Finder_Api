@@ -5,9 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+UserBreed.destroy_all
 Breed.destroy_all
+User.destroy_all
 
+# andrew = User.create(username: 'andrew', password: 'something', email: 'something@gmaill.com')
+# dog = Breed.create(name: 'dog')
+# UserBreed.create(user: andrew, breed: dog)
 
 response = RestClient.get('https://api.thedogapi.com/v1/breeds', headers: {'x-api-key': ENV['API_KEY']})
 breeds = JSON.parse response
