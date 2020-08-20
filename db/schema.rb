@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_08_12_223005) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "breeds", force: :cascade do |t|
     t.string "name"
     t.string "weight"
@@ -26,8 +29,8 @@ ActiveRecord::Schema.define(version: 2020_08_12_223005) do
   end
 
   create_table "user_breeds", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "breed_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "breed_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["breed_id"], name: "index_user_breeds_on_breed_id"
