@@ -21,7 +21,7 @@ class ApplicationController < ActionController::API
     end
 
     def authorized
-        render json: {message: 'Please Log In'}, status: :unathorized unless logged_in
+        render json: {message: 'Please Log In'}, status: :unauthorized unless logged_in
     end
 
     def login
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::API
             @token = JWT.encode({user_id: @user.id}, secret)
             render json: {user: @user, token: @token }, include: [:breeds], status: :accepted
         else
-            render json: { errors: ['Invalid username or Password']}, status: :unatuhorized
+            render json: { errors: ['Invalid username or Password']}, status: :unauthorized
         end
     end
 
